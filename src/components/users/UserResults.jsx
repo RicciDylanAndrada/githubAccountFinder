@@ -1,4 +1,5 @@
 import {useEffect,useState} from 'react'
+import UserItem from './UserItem'
 function UserResults() {
 
 const [users,setUsers]=useState([])
@@ -19,6 +20,7 @@ const fetchUsers=async()=>{
     })
 
     const data = await res.json()
+    console.log(data)
     setUsers(data)
     setLoading(false) // because we finally get the users so not loading anymote
 }
@@ -27,7 +29,7 @@ if(!loading){
     return (
         <div className="div grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
             {users.map((user)=>{
-               return  <h3>{user.login}</h3>
+                return <UserItem key={user.id} user={user} />
             })}
         </div>
     )
